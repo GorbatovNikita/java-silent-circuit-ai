@@ -57,6 +57,19 @@ android {
     }
 }
 
+chaquopy {
+    defaultConfig {
+        version = "3.14"
+//        buildPython("путь/к/python3.10")
+        pip {
+            options("--find-links", rootProject.file("app/wheels").absolutePath)
+            install("numpy==2.6.0.dev0")
+            install("sherpa-onnx==2.0.1")
+
+        }
+    }
+}
+
 dependencies {
 
     implementation(libs.appcompat)
@@ -65,6 +78,7 @@ dependencies {
     implementation(libs.constraintlayout)
 
     implementation("androidx.room:room-runtime:2.8.4")
+    implementation(files("libs/onnxruntime-classes.jar"))
     annotationProcessor("androidx.room:room-compiler:2.8.4")
 
     testImplementation(libs.junit)
